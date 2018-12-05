@@ -4,7 +4,15 @@ const puppeteer = require('puppeteer');
 app = express();
 
 app.get('/pdfify/:url/:options', async(req, res) => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: [
+            '--disable-translate',
+            '--disable-extensions',
+            '--disable-sync'
+        ],
+    });
+
     const page = await browser.newPage();
     const url = Buffer.from(req.params.url, 'base64').toString();
     const options = JSON.parse(Buffer.from(req.params.options, 'base64').toString());
