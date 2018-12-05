@@ -1,6 +1,10 @@
 {
   "dependencies": {
     "express": "^4.16.4",
+    "nodemon": "^1.18.7",
     "puppeteer": "^1.11.0"
+  },
+  "scripts": {
+    "dev": "nodemon main.js"
   }
 }

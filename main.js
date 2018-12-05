@@ -9,15 +9,15 @@ app.get('/pdfify/:url/:options', async(req, res) => {
     const url = Buffer.from(req.params.url, 'base64').toString();
     const options = JSON.parse(Buffer.from(req.params.options, 'base64').toString());
     
-    console.log(url, options);
-
     await page.goto(url, {waitUntil: 'networkidle2'});
     
-    await page.pdf(options);
+    const pdf = await page.pdf(options);
 
-    await browser.close();
-
+    await res.setHeader('Content-Length', pdf.byteLength);
+    await res.setHeader('Content-Type', 'application/pdf');
+    await res.write(pdf)
     await res.end();
+    await browser.close();
 })
 
 const port = 3000;
