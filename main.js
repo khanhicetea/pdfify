@@ -21,8 +21,10 @@ app.get('/pdfify/:url/:options', async(req, res) => {
     
     const pdf = await page.pdf(options);
 
+    await res.setHeader('Content-Disposition', 'inline; filename=print.pdf');
     await res.setHeader('Content-Length', pdf.byteLength);
     await res.setHeader('Content-Type', 'application/pdf');
+    
     await res.write(pdf)
     await res.end();
     await browser.close();
