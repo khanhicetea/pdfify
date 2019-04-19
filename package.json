@@ -2,7 +2,8 @@
   "dependencies": {
     "express": "^4.16.4",
     "nodemon": "^1.18.7",
-    "puppeteer": "^1.11.0"
+    "puppeteer": "^1.11.0",
+    "bs58": "^4.0.1"
   },
   "scripts": {
     "dev": "nodemon main.js"

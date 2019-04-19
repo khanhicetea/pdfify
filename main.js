@@ -1,5 +1,6 @@
 const express = require('express');
 const puppeteer = require('puppeteer');
+const bs58 = require('bs58');
 
 app = express();
 
@@ -14,8 +15,8 @@ app.get('/pdfify/:url/:options', async(req, res) => {
     });
 
     const page = await browser.newPage();
-    const url = Buffer.from(req.params.url, 'base64').toString();
-    const options = JSON.parse(Buffer.from(req.params.options, 'base64').toString());
+    const url = bs58.decode(req.params.url).toString();
+    const options = JSON.parse(bs58.decode(req.params.url).toString());
     
     await page.goto(url, {waitUntil: 'networkidle2'});
     
