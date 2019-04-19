@@ -16,7 +16,7 @@ app.get('/pdfify/:url/:options', async(req, res) => {
 
     const page = await browser.newPage();
     const url = bs58.decode(req.params.url).toString();
-    const options = JSON.parse(bs58.decode(req.params.url).toString());
+    const options = JSON.parse(bs58.decode(req.params.options).toString());
     
     await page.goto(url, {waitUntil: 'networkidle2'});
     
